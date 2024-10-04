@@ -40,4 +40,38 @@ export default {
                 return Promise.reject(error);
             })
   },
+
+  insertProduct(product) {
+    const url = `${baseURL}/${resourceName}`;
+    const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
+    };
+
+    return fetch(url,options)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => {
+              console.error('API Error while creating new product, ' + error);
+              return Promise.reject(error);
+            })
+  },
+
+  deleteProduct(product) {
+    const url = `${baseURL}/${resourceName}/${product.id}`;
+    const options = {
+      method: "DELETE",
+    };
+
+    return fetch(url, options)
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => {
+        console.error("API Error while deleting product, " + error);
+        return Promise.reject(error);
+      });
+  },
 }
